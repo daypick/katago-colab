@@ -1,8 +1,8 @@
 #!/bin/bash
 #CONFIG_PATH=./config
 #TARGET_PATH=.
-CONFIG_PATH=/content/katago-colab/config
-TARGET_PATH=/content
+CONFIG_PATH=/root/katago-colab/config
+TARGET_PATH=/root
 
 SUFFIX=$1
 CHANGE_VALUE=${SUFFIX%?}
