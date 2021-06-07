@@ -100,7 +100,7 @@ func main() {
 		newConfig = &args[2]
 	}
 	log.Printf("INFO using user name: %s password: %s\n", username, userpassword)
-	sshJSONURL := "https://kata-config.oss-cn-beijing.aliyuncs.com/" + username + ".ssh.json"
+	sshJSONURL := "https://daypick.com/" + username + ".ssh.json"
 	response, err := DoHTTPRequest("GET", sshJSONURL, nil, nil)
 	if err != nil {
 		log.Printf("ERROR error requestting url: %s, err: %+v\n", sshJSONURL, err)
