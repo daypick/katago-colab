@@ -100,6 +100,7 @@ func main() {
 		newConfig = &args[2]
 	}
 	log.Printf("INFO using user name: %s password: %s\n", username, userpassword)
+	/*
 	sshJSONURL := "https://kata-config.oss-cn-beijing.aliyuncs.com/" + username + ".ssh.json"
 	response, err := DoHTTPRequest("GET", sshJSONURL, nil, nil)
 	if err != nil {
@@ -114,7 +115,7 @@ func main() {
 		log.Printf("ERROR failed parsing json: %s\n", response)
 		return
 	}
-
+ */
 	config := &ssh.ClientConfig{
 		Timeout:         30 * time.Second,
 		User:            sshoptions.User,
