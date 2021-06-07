@@ -88,20 +88,24 @@ const (
 )
 
 func main() {
-	args := os.Args[1:]
+	// args := os.Args[1:]
+	/*
 	if len(args) < 2 {
 		log.Printf("ERROR usage: colab-katago USER_NAME USER_PASSWORD")
 		return
 	}
+	*/
 	//username := args[0]
 	//userpassword := args[1]
 	username := "root"
 	userpassword := "vastpass"
 	
+	/*
 	var newConfig *string = nil
 	if len(args) >= 3 {
 		newConfig = &args[2]
 	}
+	*/
 	log.Printf("INFO using user name: %s password: %s\n", username, userpassword)
 	/*
 	sshJSONURL := "https://kata-config.oss-cn-beijing.aliyuncs.com/" + username + ".ssh.json"
