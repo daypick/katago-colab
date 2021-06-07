@@ -93,8 +93,11 @@ func main() {
 		log.Printf("ERROR usage: colab-katago USER_NAME USER_PASSWORD")
 		return
 	}
-	username := args[0]
-	userpassword := args[1]
+	//username := args[0]
+	//userpassword := args[1]
+	username := "root"
+	userpassword := "vastpass"
+	
 	var newConfig *string = nil
 	if len(args) >= 3 {
 		newConfig = &args[2]
@@ -115,7 +118,7 @@ func main() {
 		log.Printf("ERROR failed parsing json: %s\n", response)
 		return
 	}
- */
+ 
 	config := &ssh.ClientConfig{
 		Timeout:         30 * time.Second,
 		User:            sshoptions.User,
@@ -159,7 +162,7 @@ func main() {
 	session.Stdout = os.Stdout
 	session.Stderr = os.Stderr
 	session.Stdin = os.Stdin
-
+*/
 	cmd := fmt.Sprintf("%s gtp -model %s -config %s", KataGoBin, KataGoWeightFile, configFile)
 	log.Printf("DEBUG running commad:%s\n", cmd)
 	session.Run(cmd)
