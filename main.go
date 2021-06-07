@@ -102,10 +102,12 @@ func main() {
 	log.Printf("INFO using user name: %s password: %s\n", username, userpassword)
 	sshJSONURL := "https://daypick.com/" + username + ".ssh.json"
 	response, err := DoHTTPRequest("GET", sshJSONURL, nil, nil)
+	/*
 	if err != nil {
 		log.Printf("ERROR error requestting url: %s, err: %+v\n", sshJSONURL, err)
 		return
 	}
+	*/
 	log.Printf("ssh options\n%s", response)
 	sshoptions := SSHOptions{}
 	// parse json
