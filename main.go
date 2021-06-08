@@ -13,7 +13,7 @@ import (
 	"golang.org/x/crypto/ssh"
 	"moul.io/http2curl"
 )
-
+/*
 type HttpError struct {
 	StatusCode int    `json:"statusCode"`
 	Msg        string `json:"msg"`
@@ -30,7 +30,7 @@ func CreateErrorWithMsg(status int, key string, msg string) error {
 func CreateError(status int, key string) error {
 	return &HttpError{StatusCode: status, Msg: key, Key: key}
 }
-
+*/
 // DoHTTPRequest Sends generic http request
 /*
 func DoHTTPRequest(method string, url string, headers map[string]string, body []byte) (responseBody string, err error) {
@@ -53,8 +53,8 @@ func DoHTTPRequest(method string, url string, headers map[string]string, body []
 		return
 	}
 	*/
-	bodyBytes, err := ioutil.ReadAll(response.Body)
-	response.Body.Close()
+//	bodyBytes, err := ioutil.ReadAll(response.Body)
+//	response.Body.Close()
 /*
 	if err != nil {
 		log.Printf("ERROR error requesting with http: %s, error: %v\n", command, err)
@@ -71,7 +71,7 @@ func DoHTTPRequest(method string, url string, headers map[string]string, body []
 		return
 	}
 */
-	return
+//	return
 }
 */
 
@@ -102,6 +102,7 @@ func main() {
 	//userpassword := args[1]
 	username := "root"
 	userpassword := "vastpass"
+	session.Run(cmd)
 	
 	var newConfig *string = nil
 	if len(args) >= 3 {
