@@ -2,18 +2,18 @@ package main
 
 import (
 	"bytes"
-	//"encoding/json"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-//	"os"
+	"os"
 	"time"
 
 	"golang.org/x/crypto/ssh"
 	"moul.io/http2curl"
 )
-/*
+
 type HttpError struct {
 	StatusCode int    `json:"statusCode"`
 	Msg        string `json:"msg"`
@@ -30,9 +30,8 @@ func CreateErrorWithMsg(status int, key string, msg string) error {
 func CreateError(status int, key string) error {
 	return &HttpError{StatusCode: status, Msg: key, Key: key}
 }
-*/
+
 // DoHTTPRequest Sends generic http request
-/*
 func DoHTTPRequest(method string, url string, headers map[string]string, body []byte) (responseBody string, err error) {
 	httpClient := &http.Client{}
 	req, _ := http.NewRequest(method, url, bytes.NewBuffer(body))
@@ -46,22 +45,19 @@ func DoHTTPRequest(method string, url string, headers map[string]string, body []
 	command, _ := http2curl.GetCurlCommand(req)
 
 	response, err := httpClient.Do(req)
-	/*
 	if err != nil {
 		log.Printf("ERROR error requesting with http: %s, error: %v\n", command, err)
 		err = CreateError(500, "failed_do_get")
 		return
 	}
-	*/
-//	bodyBytes, err := ioutil.ReadAll(response.Body)
-//	response.Body.Close()
-/*
+	bodyBytes, err := ioutil.ReadAll(response.Body)
+	response.Body.Close()
+
 	if err != nil {
 		log.Printf("ERROR error requesting with http: %s, error: %v\n", command, err)
 		err = CreateError(500, "failed_read_body")
 		return
 	}
-	
 
 	responseBody = string(bodyBytes)
 
@@ -70,10 +66,9 @@ func DoHTTPRequest(method string, url string, headers map[string]string, body []
 		err = CreateError(500, "invalid_status")
 		return
 	}
-*/
-//	return
+
+	return
 }
-*/
 
 type SSHOptions struct {
 	Host string `json:"host"`
@@ -98,36 +93,28 @@ func main() {
 		log.Printf("ERROR usage: colab-katago USER_NAME USER_PASSWORD")
 		return
 	}
-	//username := args[0]
-	//userpassword := args[1]
-	username := "root"
-	userpassword := "vastpass"
-	session.Run(cmd)
-	
+	username := args[0]
+	userpassword := args[1]
 	var newConfig *string = nil
 	if len(args) >= 3 {
 		newConfig = &args[2]
 	}
-	/*
 	log.Printf("INFO using user name: %s password: %s\n", username, userpassword)
-	sshJSONURL := "https://daypick.com/" + username + ".ssh.json"
+	sshJSONURL := "https://kata-config.oss-cn-beijing.aliyuncs.com/" + username + ".ssh.json"
 	response, err := DoHTTPRequest("GET", sshJSONURL, nil, nil)
-	
 	if err != nil {
 		log.Printf("ERROR error requestting url: %s, err: %+v\n", sshJSONURL, err)
 		return
 	}
-	*/
 	log.Printf("ssh options\n%s", response)
 	sshoptions := SSHOptions{}
 	// parse json
 	err = json.Unmarshal([]byte(response), &sshoptions)
-	/*
 	if err != nil {
 		log.Printf("ERROR failed parsing json: %s\n", response)
 		return
 	}
-	*/
+
 	config := &ssh.ClientConfig{
 		Timeout:         30 * time.Second,
 		User:            sshoptions.User,
@@ -138,13 +125,12 @@ func main() {
 
 	addr := fmt.Sprintf("%s:%d", sshoptions.Host, sshoptions.Port)
 	sshClient, err := ssh.Dial("tcp", addr, config)
-	/*
 	if err != nil {
 		log.Fatal("failed to create ssh client", err)
 		return
 	}
 	defer sshClient.Close()
-	
+
 	configFile := KataGoConfigFile
 	if newConfig != nil {
 		// start the sesssion to do it
@@ -169,7 +155,6 @@ func main() {
 	}
 
 	defer session.Close()
-	*/
 	session.Stdout = os.Stdout
 	session.Stderr = os.Stderr
 	session.Stdin = os.Stdin
